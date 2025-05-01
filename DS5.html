@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duo des Reines - Spa Marocain Luxe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0f0e13',
+                        gold: '#d4af37',
+                        burgundy: '#800020',
+                        teal: '#008080',
+                        cream: '#f5f0e6',
+                    },
+                    fontFamily: {
+                        'cormorant': ['Cormorant Garamond', 'serif'],
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&family=Montserrat:wght@300;400;500&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0f0e13;
+            color: #f5f0e6;
+        }
+        
+        .luxury-border {
+            position: relative;
+        }
+        
+        .luxury-border:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #d4af37, #800020);
+        }
+        
+        .hero-image {
+            background-image: linear-gradient(rgba(15, 14, 19, 0.7), rgba(15, 14, 19, 0.7)), url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            background: linear-gradient(145deg, #1a191f, #131218);
+            border-left: 3px solid #d4af37;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(145deg, #1f1e25, #17161c);
+        }
+        
+        .btn-luxury {
+            background: linear-gradient(45deg, #d4af37, #a38b2c);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-luxury:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+        
+        .btn-luxury:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%, -50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .btn-luxury:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #d4af37;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .gold-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(145deg, #1a191f, #131218);
+            border-top: 3px solid #d4af37;
+        }
+        
+        .modal-overlay {
+            background: rgba(15, 14, 19, 0.9);
+        }
+        
+        .modal-content {
+            background: linear-gradient(145deg, #1a191f, #131218);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="fixed w-full bg-dark bg-opacity-90 backdrop-blur-sm z-50 border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="fas fa-spa text-2xl mr-2 text-gold"></i>
+                    <span class="text-xl font-bold font-cormorant tracking-wider text-gold">DUO DES REINES</span>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-cream hover:text-gold transition font-medium">ACCUEIL</a>
+                    <a href="#about" class="nav-link text-cream hover:text-gold transition font-medium">L'EXPÉRIENCE</a>
+                    <a href="#services" class="nav-link text-cream hover:text-gold transition font-medium">SOINS</a>
+                    <a href="#gallery" class="nav-link text-cream hover:text-gold transition font-medium">GALERIE</a>
+                    <a href="#contact" class="nav-link text-cream hover:text-gold transition font-medium">CONTACT</a>
+                </nav>
+                
+                <div class="hidden md:block">
+                    <button id="reservation-btn" class="btn-luxury text-dark font-medium py-2 px-6 rounded-sm text-sm tracking-wider">
+                        RÉSERVER
+                    </button>
+                </div>
+                
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-cream focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 bg-dark border border-gray-800 rounded-sm p-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="#home" class="block px-3 py-2 rounded-sm hover:bg-gray-900">Accueil</a>
+                    <a href="#about" class="block px-3 py-2 rounded-sm hover:bg-gray-900">L'Expérience</a>
+                    <a href="#services" class="block px-3 py-2 rounded-sm hover:bg-gray-900">Soins</a>
+                    <a href="#gallery" class="block px-3 py-2 rounded-sm hover:bg-gray-900">Galerie</a>
+                    <a href="#contact" class="block px-3 py-2 rounded-sm hover:bg-gray-900">Contact</a>
+                    <button class="btn-luxury text-dark font-medium py-2 px-4 rounded-sm text-sm w-full mt-2">
+                        RÉSERVER
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-image min-h-screen flex items-center pt-20">
+        <div class="container mx-auto px-6 text-center">
+            <div class="max-w-3xl mx-auto">
+                <h1 class="text-5xl md:text-6xl font-cormorant font-bold mb-6 text-gold tracking-wider">DUO DES REINES</h1>
+                <div class="gold-divider my-6 w-1/3 mx-auto"></div>
+                <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto font-light">Un sanctuaire de luxe où la tradition marocaine rencontre l'élégance contemporaine</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#services" class="btn-luxury inline-block text-dark font-medium py-3 px-8 rounded-sm text-lg tracking-wider">
+                        NOS SOINS
+                    </a>
+                    <a href="#contact" class="inline-block font-medium py-3 px-8 rounded-sm text-lg border border-gold text-gold hover:bg-gold hover:bg-opacity-10 transition tracking-wider">
+                        Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-dark">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-3xl font-cormorant font-bold mb-4 text-cream luxury-border inline-block">L'EXPÉRIENCE</h2>
+                <p class="max-w-2xl mx-auto mt-8 text-cream text-opacity-80">Un voyage sensoriel dans un cadre d'exception</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Spa Marocain Luxe" class="w-full rounded-sm shadow-xl">
+                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-gold flex items-center justify-center">
+                            <span class="text-dark font-cormorant font-bold text-xl">SINCE<br>2015</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <h3 class="text-2xl font-cormorant font-bold mb-6 text-gold">L'ART DU BIEN-ÊTRE ROYAL</h3>
+                    <p class="mb-6 text-cream text-opacity-90 leading-relaxed">Fondé par deux passionnées du patrimoine marocain, Duo des Reines vous propose une expérience sensorielle unique dans un cadre orné de zellige traditionnel et de matériaux nobles. Notre spa est un écrin où chaque détail a été pensé pour votre bien-être.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-start">
+                            <i class="fas fa-gem text-gold mt-1 mr-4"></i>
+                            <div>
+                                <h4 class="font-medium text-cream mb-1">Zellige Authentique</h4>
+                                <p class="text-sm text-cream text-opacity-70">Mosaïques artisanales sélectionnées avec soin</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-spa text-gold mt-1 mr-4"></i>
+                            <div>
+                                <h4 class="font-medium text-cream mb-1">Produits d'Exception</h4>
+                                <p class="text-sm text-cream text-opacity-70">Huiles et soins à base d'ingrédients nobles</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-water text-gold mt-1 mr-4"></i>
+                            <div>
+                                <h4 class="font-medium text-cream mb-1">Hammam Royal</h4>
+                                <p class="text-sm text-cream text-opacity-70">Expérience traditionnelle dans un cadre luxueux</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-heart text-gold mt-1 mr-4"></i>
+                            <div>
+                                <h4 class="font-medium text-cream mb-1">Moment Privé</h4>
+                                <p class="text-sm text-cream text-opacity-70">Cabines spacieuses pour une intimité totale</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#gallery" class="inline-flex items-center mt-4 font-medium py-2 px-6 rounded-sm border border-gold text-gold hover:bg-gold hover:bg-opacity-10 transition group">
+                        Découvrir notre univers
+                        <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-dark border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-3xl font-cormorant font-bold mb-4 text-cream luxury-border inline-block">NOS SOINS EXCLUSIFS</h2>
+                <p class="max-w-2xl mx-auto mt-8 text-cream text-opacity-80">Des rituels inspirés des traditions marocaines, réinventés pour une expérience unique</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card p-8 rounded-sm shadow-lg">
+                    <div class="text-5xl mb-6 text-gold">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3 class="text-xl font-cormorant font-bold mb-4 text-cream">Rituel Sultane</h3>
+                    <p class="mb-6 text-cream text-opacity-80 leading-relaxed">Soin complet avec hammam, gommage au savon noir et massage aux huiles berbères dans notre suite privée.</p>
+                    <div class="flex justify-between items-center pt-4 border-t border-gray-800">
+                        <span class="font-bold text-gold">900 MAD</span>
+                        <span class="text-sm text-cream text-opacity-60">90 min</span>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card p-8 rounded-sm shadow-lg">
+                    <div class="text-5xl mb-6 text-gold">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h3 class="text-xl font-cormorant font-bold mb-4 text-cream">Nuit Andalouse</h3>
+                    <p class="mb-6 text-cream text-opacity-80 leading-relaxed">Enveloppement d'argile rouge, massage et temps de relaxation dans notre salle de zellige avec vue sur les jardins.</p>
+                    <div class="flex justify-between items-center pt-4 border-t border-gray-800">
+                        <span class="font-bold text-gold">1200 MAD</span>
+                        <span class="text-sm text-cream text-opacity-60">120 min</span>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card p-8 rounded-sm shadow-lg">
+                    <div class="text-5xl mb-6 text-gold">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3 class="text-xl font-cormorant font-bold mb-4 text-cream">Hammam Royal</h3>
+                    <p class="mb-6 text-cream text-opacity-80 leading-relaxed">Expérience traditionnelle de hammam avec gommage au rhassoul et massage relaxant aux huiles d'argan.</p>
+                    <div class="flex justify-between items-center pt-4 border-t border-gray-800">
+                        <span class="font-bold text-gold">650 MAD</span>
+                        <span class="text-sm text-cream text-opacity-60">60 min</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16">
+                <button id="all-services-btn" class="btn-luxury inline-block text-dark font-medium py-3 px-10 rounded-sm text-lg tracking-wider">
+                    VOIR TOUS NOS SOINS
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-24 bg-dark border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-3xl font-cormorant font-bold mb-4 text-cream luxury-border inline-block">NOTRE UNIVERS</h2>
+                <p class="max-w-2xl mx-auto mt-8 text-cream text-opacity-80">Un écrin de sérénité où chaque détail compte</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="overflow-hidden rounded-sm shadow-lg group">
+                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Spa Marocain" class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0  from-black to-transparent opacity-70 group-hover:opacity-50 transition"></div>
+                </div>
+                <div class="overflow-hidden rounded-sm shadow-lg group">
+                    <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646554?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Spa Marocain" class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0  from-black to-transparent opacity-70 group-hover:opacity-50 transition"></div>
+                </div>
+                <div class="overflow-hidden rounded-sm shadow-lg group">
+                    <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646554?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Spa Marocain" class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0  from-black to-transparent opacity-70 group-hover:opacity-50 transition"></div>
+                </div>
+                <div class="overflow-hidden rounded-sm shadow-lg group">
+                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Spa Marocain" class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0  from-black to-transparent opacity-70 group-hover:opacity-50 transition"></div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <a href="#" class="inline-flex items-center font-medium py-2 px-6 rounded-sm border border-gold text-gold hover:bg-gold hover:bg-opacity-10 transition group">
+                    VISITE VIRTUELLE
+                    <i class="fas fa-expand ml-2 transition-transform group-hover:scale-110"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-24 bg-dark border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-3xl font-cormorant font-bold mb-4 text-cream luxury-border inline-block">TÉMOIGNAGES</h2>
+                <p class="max-w-2xl mx-auto mt-8 text-cream text-opacity-80">Ce que nos clients disent de leur expérience</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="testimonial-card p-8 rounded-sm shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-gold bg-opacity-20 flex items-center justify-center">
+                            <i class="fas fa-quote-left text-gold"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-cormorant font-bold text-cream">Amélie D.</h4>
+                            <div class="flex mt-1">
+                                <i class="fas fa-star text-gold text-sm"></i>
+                                <i class="fas fa-star text-gold text-sm"></i>
+                                <i class="fas fa-star text-gold text-sm"></i>
+                                <i class="fas fa-star text-gold text-sm"></i>
+                                <i class="fas fa-star text-gold text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-cream text-opacity-80 italic">"Une expérience sensorielle exceptionnelle. Le Rituel Sultane m'a transportée dans un univers de bien-être absolu. À refaire sans hésitation."</p>
+                </div>
+                
+                <div class="testimonial-card p-8 rounded-sm shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-gold bg-opacity-20 flex items-center justify-center">
+                            <i class="fas fa-quote-left text-gold"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-cormorant font-bold text-cream">Sophie L.</h4>
+                            <div class="flex mt-1">
+                                <i class="fas fa-star text-gold text-sm"></i>
+                                <i class="fas fa-star text-gold text-sm"></i>
+                                <i class="fas fa-star text-gold text-sm"></i>
+                                <i class="fas fa-star text-gold text-sm"></i>
+                                <i class="fas fa-star text-gold text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-cream text-opacity-80 italic">"L'attention portée aux détails et la qualité des soins sont remarquables. Un véritable havre de paix au cœur de la ville."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-dark border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-3xl font-cormorant font-bold mb-4 text-cream luxury-border inline-block">NOUS CONTACTER</h2>
+                <p class="max-w-2xl mx-auto mt-8 text-cream text-opacity-80">Prenez rendez-vous ou posez-nous vos questions</p>
+            </div>
+            
+            <div class="max-w-5xl mx-auto">
+                <div class="flex flex-col lg:flex-row">
+                    <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                        <div class="border border-gray-800 p-8 rounded-sm">
+                            <h3 class="text-xl font-cormorant font-bold mb-6 text-gold">INFORMATIONS</h3>
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <i class="fas fa-map-marker-alt mt-1 mr-4 text-gold"></i>
+                                    <div>
+                                        <p class="font-medium text-cream">123 Avenue des Reines</p>
+                                        <p class="text-cream text-opacity-80">Marrakech, Maroc</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-phone-alt mt-1 mr-4 text-gold"></i>
+                                    <div>
+                                        <p class="font-medium text-cream">+212 522 789 456</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-envelope mt-1 mr-4 text-gold"></i>
+                                    <div>
+                                        <p class="font-medium text-cream">contact@duodesreines.ma</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-clock mt-1 mr-4 text-gold"></i>
+                                    <div>
+                                        <p class="font-medium text-cream">Lundi - Dimanche: 9h - 20h</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-10">
+                                <h4 class="font-cormorant font-bold mb-4 text-gold">SUIVEZ-NOUS</h4>
+                                <div class="flex space-x-4">
+                                    <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gold hover:bg-gold hover:bg-opacity-10 transition">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gold hover:bg-gold hover:bg-opacity-10 transition">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gold hover:bg-gold hover:bg-opacity-10 transition">
+                                        <i class="fab fa-pinterest-p"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:w-1/2">
+                        <div class="border border-gray-800 p-8 rounded-sm">
+                            <h3 class="text-xl font-cormorant font-bold mb-6 text-gold">PRENDRE RENDEZ-VOUS</h3>
+                            <form>
+                                <div class="mb-6">
+                                    <label class="block mb-2 font-medium text-cream">Nom complet</label>
+                                    <input type="text" class="w-full px-4 py-3 bg-dark border border-gray-800 rounded-sm focus:outline-none focus:border-gold text-cream">
+                                </div>
+                                <div class="mb-6">
+                                    <label class="block mb-2 font-medium text-cream">Email</label>
+                                    <input type="email" class="w-full px-4 py-3 bg-dark border border-gray-800 rounded-sm focus:outline-none focus:border-gold text-cream">
+                                </div>
+                                <div class="mb-6">
+                                    <label class="block mb-2 font-medium text-cream">Téléphone</label>
+                                    <input type="tel" class="w-full px-4 py-3 bg-dark border border-gray-800 rounded-sm focus:outline-none focus:border-gold text-cream">
+                                </div>
+                                <div class="mb-6">
+                                    <label class="block mb-2 font-medium text-cream">Soin souhaité</label>
+                                    <select class="w-full px-4 py-3 bg-dark border border-gray-800 rounded-sm focus:outline-none focus:border-gold text-cream">
+                                        <option>Rituel Sultane</option>
+                                        <option>Nuit Andalouse</option>
+                                        <option>Hammam Royal</option>
+                                        <option>Autre</option>
+                                    </select>
+                                </div>
+                                <div class="mb-6">
+                                    <label class="block mb-2 font-medium text-cream">Message</label>
+                                    <textarea rows="4" class="w-full px-4 py-3 bg-dark border border-gray-800 rounded-sm focus:outline-none focus:border-gold text-cream"></textarea>
+                                </div>
+                                <button type="submit" class="btn-luxury w-full text-dark font-medium py-3 px-4 rounded-sm tracking-wider">
+                                    ENVOYER
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-dark border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0">
+                    <div class="flex items-center">
+                        <i class="fas fa-spa text-2xl mr-2 text-gold"></i>
+                        <span class="text-xl font-cormorant font-bold tracking-wider text-gold">DUO DES REINES</span>
+                    </div>
+                    <p class="mt-2 text-sm text-cream text-opacity-70">Spa traditionnel marocain de luxe</p>
+                </div>
+                
+                <div class="flex space-x-6 mb-8 md:mb-0">
+                    <a href="#" class="text-cream text-opacity-70 hover:text-gold transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-cream text-opacity-70 hover:text-gold transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-cream text-opacity-70 hover:text-gold transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                
+                <div class="text-sm text-cream text-opacity-70">
+                    <p>© 2023 DUO DES REINES. TOUS DROITS RÉSERVÉS.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Reservation Modal -->
+    <div id="reservation-modal" class="fixed inset-0 z-50 hidden modal-overlay flex items-center justify-center p-4">
+        <div class="modal-content w-full max-w-2xl p-8 rounded-sm relative">
+            <button id="close-modal" class="absolute top-4 right-4 text-cream text-opacity-70 hover:text-gold">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <h3 class="text-2xl font-cormorant font-bold mb-6 text-gold">RÉSERVER VOTRE SOIN</h3>
+            
+            <form>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block mb-2 font-medium text-cream">Nom complet</label>
+                        <input type="text" class="w-full px-4 py-3 bg-dark border border-gray-800 rounded-sm focus:outline-none focus:border-gold text-cream">
+                    </div>
+                    <div>
+                        <label class="block mb-2 font-medium text-cream">Email</label>
+                        <input type="email" class="w-full px-4 py-3 bg-dark border border-gray-800 rounded-sm focus:outline-none focus:border-gold text-cream">
+                    </div>
+                    <div>
+                        <label class="block mb-2 font-medium text-cream">Téléphone</label>
+                        <input type="tel" class="w-full px-4 py-3 bg-dark border border-gray-800 rounded-sm focus:outline-none focus:border-gold text-cream">
+                    </div>
+                    <div>
+                        <label class="block mb-2 font-medium text-cream">Date souhaitée</label>
+                        <input type="date" class="w-full px-4 py-3 bg-dark border border-gray-800 rounded-sm focus:outline-none focus:border-gold text-cream">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block mb-2 font-medium text-cream">Soin</label>
+                        <select class="w-full px-4 py-3 bg-dark border border-gray-800 rounded-sm focus:outline-none focus:border-gold text-cream">
+                            <option>Rituel Sultane - 900 MAD</option>
+                            <option>Nuit Andalouse - 1200 MAD</option>
+                            <option>Hammam Royal - 650 MAD</option>
+                            <option>Massage Berbère - 750 MAD</option>
+                            <option>Soin du Visage - 600 MAD</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block mb-2 font-medium text-cream">Message</label>
+                        <textarea rows="3" class="w-full px-4 py-3 bg-dark border border-gray-800 rounded-sm focus:outline-none focus:border-gold text-cream"></textarea>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-luxury w-full mt-6 text-dark font-medium py-3 px-4 rounded-sm tracking-wider">
+                    CONFIRMER LA RÉSERVATION
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+        
+        // Modal handling
+        const modal = document.getElementById('reservation-modal');
+        const openModalButtons = [
+            document.getElementById('reservation-btn'),
+            document.getElementById('all-services-btn')
+        ];
+        const closeModalButton = document.getElementById('close-modal');
+        
+        openModalButtons.forEach(button => {
+            if (button) {
+                button.addEventListener('click', () => {
+                    modal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+        });
+        
+        closeModalButton.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Add animation to service cards on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeIn');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.service-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
